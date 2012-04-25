@@ -41,6 +41,8 @@
 		E4C2424910CC5A17004149E2 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4C2424610CC5A17004149E2 /* IOKit.framework */; };
 		E4EB6799138ADC1D00A09F29 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E987C0D515485FF600AE352E /* ofxOpenNITT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E987C0D315485FF600AE352E /* ofxOpenNITT.cpp */; };
+		E9C9FB441548965800624D79 /* ofxOpenNITT_User.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9C9FB421548965800624D79 /* ofxOpenNITT_User.cpp */; };
+		E9C9FB531548A6CC00624D79 /* TT_Box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9C9FB511548A6CC00624D79 /* TT_Box.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -245,6 +247,10 @@
 		E4EB6923138AFD0F00A09F29 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		E987C0D315485FF600AE352E /* ofxOpenNITT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxOpenNITT.cpp; path = TT_ofxOpenNI/ofxOpenNITT.cpp; sourceTree = "<group>"; };
 		E987C0D415485FF600AE352E /* ofxOpenNITT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxOpenNITT.h; path = TT_ofxOpenNI/ofxOpenNITT.h; sourceTree = "<group>"; };
+		E9C9FB421548965800624D79 /* ofxOpenNITT_User.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOpenNITT_User.cpp; sourceTree = "<group>"; };
+		E9C9FB431548965800624D79 /* ofxOpenNITT_User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxOpenNITT_User.h; sourceTree = "<group>"; };
+		E9C9FB511548A6CC00624D79 /* TT_Box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TT_Box.cpp; path = 3d/TT_Box.cpp; sourceTree = "<group>"; };
+		E9C9FB521548A6CC00624D79 /* TT_Box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TT_Box.h; path = 3d/TT_Box.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -598,6 +604,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				E9C9FB501548A68A00624D79 /* 3D */,
 				E9C9FB411548914500624D79 /* ofxOpenNITT */,
 				7704EC2514C7066A001AF021 /* main.cpp */,
 				7704EC2114C70657001AF021 /* testApp.cpp */,
@@ -622,8 +629,19 @@
 			children = (
 				E987C0D315485FF600AE352E /* ofxOpenNITT.cpp */,
 				E987C0D415485FF600AE352E /* ofxOpenNITT.h */,
+				E9C9FB421548965800624D79 /* ofxOpenNITT_User.cpp */,
+				E9C9FB431548965800624D79 /* ofxOpenNITT_User.h */,
 			);
 			name = ofxOpenNITT;
+			sourceTree = "<group>";
+		};
+		E9C9FB501548A68A00624D79 /* 3D */ = {
+			isa = PBXGroup;
+			children = (
+				E9C9FB511548A6CC00624D79 /* TT_Box.cpp */,
+				E9C9FB521548A6CC00624D79 /* TT_Box.h */,
+			);
+			name = 3D;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -715,6 +733,8 @@
 				7704EC2414C70657001AF021 /* testApp.cpp in Sources */,
 				7704EC2614C7066A001AF021 /* main.cpp in Sources */,
 				E987C0D515485FF600AE352E /* ofxOpenNITT.cpp in Sources */,
+				E9C9FB441548965800624D79 /* ofxOpenNITT_User.cpp in Sources */,
+				E9C9FB531548A6CC00624D79 /* TT_Box.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

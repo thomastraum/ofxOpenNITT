@@ -3,6 +3,10 @@
 //--------------------------------------------------------------
 void testApp::setup() {
     openni.setup();
+    box.build();
+    box.width   = ofGetWidth();
+    box.height  = ofGetHeight();
+    box.depth   = ofGetWidth();
 }
 
 //--------------------------------------------------------------
@@ -12,7 +16,19 @@ void testApp::update(){
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
+void testApp::draw()
+{
+    cam.begin();
+    
+//    box.draw();
+    ofSetColor(255, 0, 0);
+    ofBox(0,0,-100,100);
+    ofSetColor(255, 0, 255);
+    ofBox(0,0,100,100);
+    openni.draw3dUsers();
+    
+    cam.end();
+    
 	openni.draw();
 }
 

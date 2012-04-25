@@ -30,10 +30,14 @@ public:
     
     void setup();
     void update();
-    void draw();
-    void exit();
     
+    void draw();
+    void draw3dUsers();
+    void draw3dUser();
+    
+    void exit();
     void keyPressedEvent( ofKeyEventArgs & args );
+    
     
 };
 

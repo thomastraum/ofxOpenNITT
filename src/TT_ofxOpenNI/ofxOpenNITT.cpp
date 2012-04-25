@@ -52,7 +52,8 @@ void ofxOpenNITT::update(){
 void ofxOpenNITT::draw()
 {
 	ofSetColor(255, 255, 255);
-    drawUsers();
+//    drawUsers();
+//    draw3dUsers();
     if ( debug_draw ) drawDebug();    // do some drawing of user clouds and masks
 
 	string msg = " MILLIS: " + ofToString(ofGetElapsedTimeMillis()) + " FPS: " + ofToString(ofGetFrameRate());
@@ -65,19 +66,55 @@ void ofxOpenNITT::drawUsers()
     ofPushMatrix();
     ofScale(ofGetWidth()/openNIDevice.getWidth(), ofGetHeight() / openNIDevice.getHeight() );
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    
     int numUsers = openNIDevice.getNumTrackedUsers();
     for (int nID = 0; nID < numUsers; nID++){
         ofxOpenNIUser & user = openNIDevice.getTrackedUser(nID);
         user.drawMask();
         user.drawSkeleton();
+        
         ofPushMatrix();
         ofTranslate(320, 240, -1000);
         user.drawPointCloud();
         ofPopMatrix();
     }
+    
     ofDisableBlendMode();
     ofPopMatrix();
 }
+
+//--------------------------------------------------------------
+void ofxOpenNITT::draw3dUsers()
+{
+    //    ofEnableAlphaBlending();
+    glEnable(GL_DEPTH_TEST);
+    glPushMatrix();
+
+    int numUsers = openNIDevice.getNumTrackedUsers();
+    for (int nID = 0; nID < numUsers; nID++){
+        ofxOpenNIUser & user = openNIDevice.getTrackedUser(nID);
+        ofPushStyle();
+        ofSetColor(255, 0, 0);
+//        ofLogNotice("TT") << user.getCenter();
+        ofPoint p = user.getCenter(); //*-1;
+        p.rotate( 180, ofVec3f(1,1,1));
+//        ofLogNotice("TT") << p;
+        ofCircle( p, 200 );
+        ofPopStyle();
+    }
+
+    glPopMatrix();
+    //    ofDisableAlphaBlending();
+    glDisable(GL_DEPTH_TEST);
+}
+
+//--------------------------------------------------------------
+void ofxOpenNITT::draw3dUser()
+{
+//    ofLogNotice("TT") << user.getCenter();
+    
+}
+
 
 //--------------------------------------------------------------
 void ofxOpenNITT::drawDebug()

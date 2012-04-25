@@ -3,6 +3,7 @@
 
 #include "ofMain.h"
 #include "ofxOpenNITT.h"
+#include "TT_Box.h"
 
 class testApp : public ofBaseApp{
 
@@ -22,6 +23,8 @@ public:
 	void windowResized(int w, int h);
     
     ofxOpenNITT openni;
+    ofEasyCam   cam;
+    TT_Box      box;
 };
 
 #endif

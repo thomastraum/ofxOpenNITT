@@ -1,12 +1,30 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
+# xcode noise
+*.mode1v3
+# *.pbxuser
+# *.perspective 
+# *.perspectivev3
+*.pyc 
+*~.nib/
+build/
+*.xcuserdatad
 
-# Compiled Dynamic libraries
-*.so
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
+#----------------------- tt
+#xcuserdata
+*.mode1v3
+*.mode2v3
+
+#.xcodeproj
+#!*.xcodeproj/project.pbxproj
+
+bin/data/*
+
+#-------dir specific
+*.app
+
+# old skool
+.svn
+
+# osx noise
+.DS_Store
+profile

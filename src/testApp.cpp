@@ -18,18 +18,25 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw()
 {
+    glEnable(GL_DEPTH_TEST);
+    
+//    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+//    cam.setDistance( 4000 );
     cam.begin();
     
 //    box.draw();
-    ofSetColor(255, 0, 0);
-    ofBox(0,0,-100,100);
-    ofSetColor(255, 0, 255);
-    ofBox(0,0,100,100);
     openni.draw3dUsers();
+    
+    cout << g_worldToProjective( ofPoint(1,1,1) ) << endl;
     
     cam.end();
     
+    glDisable(GL_DEPTH_TEST);
+    
 	openni.draw();
+    
+    
+    
 }
 
 //--------------------------------------------------------------
@@ -40,7 +47,17 @@ void testApp::exit(){
 }
 
 //--------------------------------------------------------------
-void testApp::keyPressed(int key){
+void testApp::keyPressed(int key)
+{
+    switch (key) {
+            
+        case 'f':
+            ofToggleFullscreen();
+            break;
+            
+        default:
+            break;
+    }
 }
 
 //--------------------------------------------------------------

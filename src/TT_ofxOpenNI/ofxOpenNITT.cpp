@@ -57,7 +57,7 @@ void ofxOpenNITT::draw()
     if ( debug_draw ) drawDebug();    // do some drawing of user clouds and masks
 
 	string msg = " MILLIS: " + ofToString(ofGetElapsedTimeMillis()) + " FPS: " + ofToString(ofGetFrameRate());
-	ofDrawBitmapString(msg, 20, 506);
+	ofDrawBitmapString(msg, 20, ofGetHeight()-25);
 }
 
 //--------------------------------------------------------------
@@ -86,25 +86,34 @@ void ofxOpenNITT::drawUsers()
 //--------------------------------------------------------------
 void ofxOpenNITT::draw3dUsers()
 {
-    //    ofEnableAlphaBlending();
     glEnable(GL_DEPTH_TEST);
-    glPushMatrix();
-
+    ofPushStyle();
+    glMatrixMode(GL_PROJECTION);
+    ofPushMatrix();
+    
+    float flipped[] = {
+        1, 0, 0, 0,
+        0, -1, 0, 0, 
+        0, 0, -1, 0,
+        0, 0, 0, 1
+    };
+    glMultMatrixf( flipped );
+    
+    ofSetColor(0, 255, 0);
+    ofBox(1040.48, -241.389, 3157.94, 100);
+    // 1040.48, -241.389, 3157.94
+    
     int numUsers = openNIDevice.getNumTrackedUsers();
     for (int nID = 0; nID < numUsers; nID++){
         ofxOpenNIUser & user = openNIDevice.getTrackedUser(nID);
-        ofPushStyle();
-        ofSetColor(255, 0, 0);
-//        ofLogNotice("TT") << user.getCenter();
-        ofPoint p = user.getCenter(); //*-1;
-        p.rotate( 180, ofVec3f(1,1,1));
-//        ofLogNotice("TT") << p;
-        ofCircle( p, 200 );
-        ofPopStyle();
+        ofPoint p = user.getCenter();
+        ofLogNotice("TT") << p;
+        ofSetColor(255, 255, 0);
+        ofBox(p, 100);
     }
-
-    glPopMatrix();
-    //    ofDisableAlphaBlending();
+    
+    ofPopMatrix();
+    ofPopStyle();
     glDisable(GL_DEPTH_TEST);
 }
 
@@ -114,7 +123,6 @@ void ofxOpenNITT::draw3dUser()
 //    ofLogNotice("TT") << user.getCenter();
     
 }
-
 
 //--------------------------------------------------------------
 void ofxOpenNITT::drawDebug()
@@ -146,3 +154,12 @@ void ofxOpenNITT::keyPressedEvent(ofKeyEventArgs & args)
     }
 }
 
+void ofxOpenNITT::kinectSpaceToWorldSpace()
+{
+    // this assumes a 640 x 480 resolution as per above defines
+    ofPoint projective;
+    projective.x = COEFX * p.x / p.z + HALFWIDTH;
+    projective.y = HALFHEIGHT - COEFY * p.y / p.z;
+    projective.z = p.z;
+    return projective;
+}

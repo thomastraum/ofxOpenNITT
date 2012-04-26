@@ -38,6 +38,7 @@ public:
     void exit();
     void keyPressedEvent( ofKeyEventArgs & args );
     
+    void kinectSpaceToWorldSpace();
     
 };
 

@@ -12,6 +12,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxOpenNI.h"
+#include "ofxOpenNITT_User.h"
 
 class ofxOpenNITT {
 
@@ -38,7 +39,7 @@ public:
     void exit();
     void keyPressedEvent( ofKeyEventArgs & args );
     
-    void kinectSpaceToWorldSpace();
+    ofPoint kinectSpaceToWorldSpace( ofPoint p );
     
 };
 

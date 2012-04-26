@@ -86,6 +86,14 @@ void ofxOpenNITT::drawUsers()
 //--------------------------------------------------------------
 void ofxOpenNITT::draw3dUsers()
 {
+    
+    ofPoint p1 = ofPoint( 10,10,10 );
+    ofPoint projective = g_worldToProjective( p1 ); 
+    cout << "projective: " << projective << endl;
+    ofPoint world = openNIDevice.projectiveToWorld(p1);
+    cout << "world: " << world << endl;
+    
+    
     glEnable(GL_DEPTH_TEST);
     ofPushStyle();
     glMatrixMode(GL_PROJECTION);
@@ -154,12 +162,26 @@ void ofxOpenNITT::keyPressedEvent(ofKeyEventArgs & args)
     }
 }
 
-void ofxOpenNITT::kinectSpaceToWorldSpace()
+ofPoint ofxOpenNITT::kinectSpaceToWorldSpace( ofPoint p )
 {
+    // this assumes a 640 x 480 resolution as per above defines
+//    ofPoint projective;
+//    projective.x = COEFX * p.x / p.z + HALFWIDTH;
+//    projective.y = HALFHEIGHT - COEFY * p.y / p.z;
+//    projective.z = p.z;
+//    return projective;
+    
     // this assumes a 640 x 480 resolution as per above defines
     ofPoint projective;
     projective.x = COEFX * p.x / p.z + HALFWIDTH;
     projective.y = HALFHEIGHT - COEFY * p.y / p.z;
     projective.z = p.z;
     return projective;
+    
+    
 }
+
+
+
+
+

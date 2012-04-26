@@ -7,7 +7,7 @@
 //
 
 #pragma once
-#include "ofxOpenNITT.h"
+#include "ofxOpenNI.h"
 
 class ofxOpenNITT_User : public ofxOpenNIUser {
     
@@ -15,6 +15,16 @@ class ofxOpenNITT_User : public ofxOpenNIUser {
     
 public:
     
-    
+    void drawSkeletonInsideWorld()
+    {
+        ofPushStyle();
+        
+        for(int i = 0; i < joints.size(); i++) {
+            ofPoint p = joints[i].getWorldPosition();
+            ofBox(p, 50);
+        }
+        
+        ofPopStyle();
+    }
     
 };

@@ -26,8 +26,7 @@ void testApp::draw()
     
 //    box.draw();
     openni.draw3dUsers();
-    
-    cout << g_worldToProjective( ofPoint(1,1,1) ) << endl;
+
     
     cam.end();
     

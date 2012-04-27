@@ -22,7 +22,7 @@ void ofxOpenNITT::setup() {
     openNIDevice.setRegister(true); // register depth to image
     openNIDevice.setMirror(true);
     
-    openNIDevice.setMaxNumUsers(2); // defualt is 4
+    openNIDevice.setMaxNumUsers(4); // defualt is 4
     //    openNIDevice.setUseMaskTextureAllUsers(true);
     //    openNIDevice.setUsePointCloudsAllUsers(true);
     //    openNIDevice.setPointCloudDrawSizeAllUsers(3); // sets the size the points are drawn on screen (in pixels)
@@ -39,7 +39,6 @@ void ofxOpenNITT::setup() {
     // allows you to set all tracked user properties to the same type easily
     
     debug_draw = true;
-    ofAddListener( ofEvents.keyPressed, this, &ofxOpenNITT::keyPressedEvent );
 }
 
 //--------------------------------------------------------------
@@ -83,15 +82,27 @@ void ofxOpenNITT::drawUsers()
     ofPopMatrix();
 }
 
+void ofxOpenNITT::drawCenter()
+{   
+    int numUsers = openNIDevice.getNumTrackedUsers();
+    for (int nID = 0; nID < numUsers; nID++){
+        ofxOpenNIUser & user = openNIDevice.getTrackedUser(nID);
+        ofPoint p = user.getCenter();
+        ofLogNotice("TT") << p;
+        ofSetColor(255, 255, 255);
+        ofBox(p.x,p.y,-500, 50);
+    }
+}
+
 //--------------------------------------------------------------
 void ofxOpenNITT::draw3dUsers()
 {
     
-    ofPoint p1 = ofPoint( 10,10,10 );
-    ofPoint projective = g_worldToProjective( p1 ); 
-    cout << "projective: " << projective << endl;
-    ofPoint world = openNIDevice.projectiveToWorld(p1);
-    cout << "world: " << world << endl;
+//    ofPoint p1 = ofPoint( 10,10,10 );
+//    ofPoint projective = g_worldToProjective( p1 ); 
+//    cout << "projective: " << projective << endl;
+//    ofPoint world = openNIDevice.projectiveToWorld(p1);
+//    cout << "world: " << world << endl;
     
     
     glEnable(GL_DEPTH_TEST);
@@ -101,24 +112,48 @@ void ofxOpenNITT::draw3dUsers()
     
     float flipped[] = {
         1, 0, 0, 0,
-        0, -1, 0, 0, 
+        0, 1, 0, 0, 
         0, 0, -1, 0,
         0, 0, 0, 1
     };
     glMultMatrixf( flipped );
-    
-    ofSetColor(0, 255, 0);
-    ofBox(1040.48, -241.389, 3157.94, 100);
-    // 1040.48, -241.389, 3157.94
-    
-    int numUsers = openNIDevice.getNumTrackedUsers();
-    for (int nID = 0; nID < numUsers; nID++){
-        ofxOpenNIUser & user = openNIDevice.getTrackedUser(nID);
-        ofPoint p = user.getCenter();
-        ofLogNotice("TT") << p;
-        ofSetColor(255, 255, 0);
-        ofBox(p, 100);
+
+    for(int i = 0; i < openNIDevice.getNumTrackedUsers(); i++){
+        ofxOpenNIUser & user = openNIDevice.getTrackedUser(i);
+        for(int j = 0; j < user.getNumJoints(); j++){
+            ofxOpenNIJoint & joint = user.getJoint((Joint)j);
+            
+//            cout << joint.getName();
+  
+            if (j==0) {
+                ofSetColor( 255,0,0);
+//                ofLogNotice("TT") << "getWorldPosition:      " << joint.getWorldPosition();
+//                ofLogNotice("TT") << "getProjectivePosition: " << joint.getProjectivePosition();
+            } else {
+                ofSetColor( 255,255,255);
+            }
+            
+            ofBox(joint.getWorldPosition(), 20);
+            
+            //do something with the joint, or:
+            if(joint.isParent()){ // ie., it's like a limb...
+                // ...do something with the "limb"
+                ofSetColor( 255,255,0);
+                ofLine(ofVec3f(joint.getWorldPosition()), ofVec3f(joint.getParent().getWorldPosition()));
+            }
+        }
     }
+    
+//    int numUsers = openNIDevice.getNumTrackedUsers();
+//    for (int nID = 0; nID < numUsers; nID++){
+//        ofxOpenNIUser & user = openNIDevice.getTrackedUser(nID);
+//        ofPoint p = user.getCenter();
+//        ofLogNotice("TT") << p;
+//        ofSetColor(255, 255, 0);
+//        ofBox(p, 100);
+//        ofSetColor(0, 0, 255);
+//        ofBox(p.x,p.y,0, 100);
+//    }
     
     ofPopMatrix();
     ofPopStyle();

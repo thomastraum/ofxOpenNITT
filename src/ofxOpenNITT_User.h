@@ -17,14 +17,6 @@ public:
     
     void drawSkeletonInsideWorld()
     {
-        ofPushStyle();
-        
-        for(int i = 0; i < joints.size(); i++) {
-            ofPoint p = joints[i].getWorldPosition();
-            ofBox(p, 50);
-        }
-        
-        ofPopStyle();
     }
     
 };

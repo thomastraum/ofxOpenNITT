@@ -6,7 +6,7 @@ void testApp::setup() {
     box.build();
     box.width   = ofGetWidth();
     box.height  = ofGetHeight();
-    box.depth   = ofGetWidth();
+    box.depth   = ofGetWidth()*2;
 }
 
 //--------------------------------------------------------------
@@ -20,19 +20,28 @@ void testApp::draw()
 {
     glEnable(GL_DEPTH_TEST);
     
+    
 //    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
 //    cam.setDistance( 4000 );
     cam.begin();
+    ofSetColor(255, 255, 255, 30);
+    box.draw();
     
-//    box.draw();
     openni.draw3dUsers();
-
+//    openni.drawCenter();
+    
+//    cout << g_worldToProjective( ofPoint(1,1,1) ) << endl;
+//    projectiveToWorld
     
     cam.end();
     
     glDisable(GL_DEPTH_TEST);
     
+    ofScale(.5,.5);
 	openni.draw();
+    
+//    
+//    openni.drawCenter();
     
     
     

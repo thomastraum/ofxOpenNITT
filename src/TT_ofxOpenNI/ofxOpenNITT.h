@@ -40,7 +40,7 @@ public:
     void keyPressedEvent( ofKeyEventArgs & args );
     
     ofPoint kinectSpaceToWorldSpace( ofPoint p );
-    
+    void drawCenter();
 };
 
 //#endif

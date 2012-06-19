@@ -1,9 +1,10 @@
 #ifndef _TEST_APP
 #define _TEST_APP
 
+#pragma once
 #include "ofMain.h"
-#include "ofxOpenNITT.h"
-#include "TT_Box.h"
+#include "TT_Player.h"
+#include "TT_UserManager.h"
 
 class testApp : public ofBaseApp{
 
@@ -15,16 +16,12 @@ public:
     void exit();
     
 	void keyPressed  (int key);
-	void keyReleased(int key);
-	void mouseMoved(int x, int y );
-	void mouseDragged(int x, int y, int button);
-	void mousePressed(int x, int y, int button);
-	void mouseReleased(int x, int y, int button);
 	void windowResized(int w, int h);
     
-    ofxOpenNITT openni;
-    ofEasyCam   cam;
-    TT_Box      box;
+    ofEasyCam       cam;
+    
+    TT_Player       player;
+    TT_UserManager  user_manager;
 };
 
 #endif

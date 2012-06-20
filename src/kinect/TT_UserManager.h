@@ -38,32 +38,42 @@ public:
     
     //--------------------------------------------------------------
     void draw() 
-    {    
-        ofPushStyle();
-        glEnable(GL_DEPTH_TEST);
-        
-        glMatrixMode(GL_PROJECTION);
-        ofPushMatrix();
-        float flipped[] = {
-            1, 0, 0, 0,
-            0, 1, 0, 0, 
-            0, 0, -1, 0,
-            0, 0, 0, 1
-        };
-        glMultMatrixf( flipped );
-        
+    {   
+
         vector<TT_User*>::iterator it = users.begin();
         while( it != users.end() ) {
             TT_User * u = *it;
             u->draw();
             it++;
         }
-//        glLoadIdentity();
-        glMatrixMode(GL_PROJECTION);
-        ofPopMatrix();
         
-        glDisable(GL_DEPTH_TEST);
-        ofPopStyle();
+        
+//        ofPushStyle();
+//        glEnable(GL_DEPTH_TEST);
+//        
+////        glMatrixMode(GL_PROJECTION);
+////        ofPushMatrix();
+////
+////        float flipped[] = {
+////            1, 0, 0, 0,
+////            0, 1, 0, 0, 
+////            0, 0, 1, 0,
+////            0, 0, 0, 1
+////        };
+////        glMultMatrixf( flipped );
+//        
+//        vector<TT_User*>::iterator it = users.begin();
+//        while( it != users.end() ) {
+//            TT_User * u = *it;
+//            u->draw();
+//            it++;
+//        }
+////        glLoadIdentity();
+////        glMatrixMode(GL_PROJECTION);
+////        ofPopMatrix();
+//        
+//        glDisable(GL_DEPTH_TEST);
+//        ofPopStyle();
     }
     
 protected:
